@@ -15,7 +15,10 @@ import time
 import csv
 from collections import defaultdict
 
-import tushare as ts
+try:
+    import tushare as ts
+except ImportError:
+    ts = None
 import pandas as pd
 
 TUSHARE_TOKEN = os.environ.get('TUSHARE_TOKEN', '')
@@ -38,8 +41,8 @@ def fetch_csi300_data():
         print(f"读取本地缓存: {cache}")
         daily = pd.read_csv(cache, dtype={'trade_date': str})
     else:
-        if not TUSHARE_TOKEN:
-            raise SystemExit("未找到本地缓存 csi300_daily_2y.csv，且未设置 TUSHARE_TOKEN 环境变量。")
+        if not TUSHARE_TOKEN or ts is None:
+            raise SystemExit("未找到本地缓存 csi300_daily_2y.csv，且未设置 TUSHARE_TOKEN 环境变量或未安装 tushare。")
         ts.set_token(TUSHARE_TOKEN)
         pro = ts.pro_api()
 
