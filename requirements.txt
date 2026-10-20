@@ -23,3 +23,7 @@ cvxopt==1.3.3
 # 投资组合实验（真实 A 股数据；数据已随包提供为 CSV，
 # 仅当需要重新联网抓取时才需要 tushare token）
 # tushare==1.4.29
+
+# diamonds 协变量平衡实验（数据已随包提供为 diamonds.csv，
+# 仅当需要重新联网抓取 OpenML 时才需要 scikit-learn）
+# scikit-learn==1.6.1
